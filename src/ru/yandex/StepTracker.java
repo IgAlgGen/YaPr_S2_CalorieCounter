@@ -18,30 +18,35 @@ public class StepTracker {
     }
 
     public void setGoalByStepsPerDay(int goalByStepsPerDay) {
-        // TODO реализовать логику проверки на положительное число
-        this.goalByStepsPerDay = goalByStepsPerDay;
+        if (!UserInputCheck.isStepsCorrect(goalByStepsPerDay))
+            this.goalByStepsPerDay = goalByStepsPerDay;
     }
 
     void addNewNumberStepsPerDay() {
-        System.out.println("Введите номер месяца от 1 до 12 (включительно)");
         // ввод и проверка номера месяца
-        int monthNumber = Integer.parseInt(scanner.next());
-        System.out.println("Введите день от 1 до 30 (включительно)");
+        System.out.println("Введите номер месяца от 1 до 12 (включительно)");
+        int monthNumber = UserInputCheck.checkNumber(scanner.nextLine());
+        if (UserInputCheck.isMonthCorrect(monthNumber)) return;
         // ввод и проверка дня
-        int dayNumber = Integer.parseInt(scanner.next());
-        System.out.println("Введите количество шагов");
+        System.out.println("Введите день от 1 до 30 (включительно)");
+        int dayNumber = UserInputCheck.checkNumber(scanner.nextLine());
+        if (UserInputCheck.isDayCorrect(dayNumber)) return;
         // ввод и проверка количества шагов
-        int steps = Integer.parseInt(scanner.next());
+        System.out.println("Введите количество шагов");
+        int steps = UserInputCheck.checkNumber(scanner.nextLine());
+        if (UserInputCheck.isStepsCorrect(steps)) return;
         // получение соответствующего объекта MonthData из массива
         MonthData monthData = monthToData[monthNumber - 1];
         // сохранение полученных данных
         monthData.days[dayNumber - 1] = steps;
     }
 
-    void printStatistic(){
+    void printStatistic() {
         System.out.println("Введите номер месяца от 1 до 12 (включительно)");
-        int monthNumber = Integer.parseInt(scanner.next());
-        int sumSteps =  sumStepsFromMonth(monthNumber);
+        int monthNumber = UserInputCheck.checkNumber(scanner.nextLine());
+        if (UserInputCheck.isMonthCorrect(monthNumber)) return;
+        // получение суммы шагов за месяц
+        int sumSteps = sumStepsFromMonth(monthNumber);
         // вывод общей статистики по дням
         printDaysAndStepsFromMonth(monthNumber);
         // вывод суммы шагов за месяц
