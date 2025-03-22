@@ -15,7 +15,7 @@ public class Main {
                     stepTracker.addNewNumberStepsPerDay();
                     break;
                 case 2:
-                    System.out.println("Введите цель по количеству шагов в день");
+                    System.out.print("Введите цель по количеству шагов в день: ");
                     int goalByStepsPerDay = UserInputCheck.checkNumber(sc.nextLine());
                     stepTracker.setGoalByStepsPerDay(goalByStepsPerDay);
                     break;
@@ -37,5 +37,6 @@ public class Main {
         System.out.println("2. Изменить цель по количеству шагов в день");
         System.out.println("3. Напечатать статистику за определённый месяц");
         System.out.println("4. Выйти из приложения");
+        System.out.print("Введите номер действия: ");
     }
 }
